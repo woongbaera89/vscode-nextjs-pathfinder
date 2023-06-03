@@ -13,7 +13,7 @@
   "categories": [
     "Other"
   ],
-  "publisher": "woongbaera89",
+  "publisher": "woongbaera",
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
