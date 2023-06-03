@@ -4,6 +4,10 @@ All notable changes to the "nextjs-pathfinder" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.0]
+
+- Increase max results to 30000 for large project
+
 ## [1.1.0]
 
 - Show results ordered by relevance
