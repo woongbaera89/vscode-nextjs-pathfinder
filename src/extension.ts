@@ -37,63 +37,69 @@ export function activate(context: vscode.ExtensionContext): void {
         segments.shift();
       }
 
-      Promise.all([vscode.workspace.findFiles(PATTERN1, null, MAX_FILES)]).then(
-        (results) => {
-          const uris = results.flat();
-          vscode.window.showWarningMessage(
-            `[Pathfinder] ${uris.length} ${JSON.stringify(uris[0])}`
-          );
-          // Calculate match scores for all URIs
-          const scoredUris = uris.map((uri) => {
-            const relativePath = vscode.workspace.asRelativePath(uri.fsPath);
-            try {
-              const score = matchPattern(relativePath, segments);
-              return { uri, score };
-            } catch (err) {
-              return { uri, score: 0 };
-            }
-          });
-
-          // /terms
-          // product/23123
-          // Filter and sort URIs based on match scores
-          const minScore = Math.max(segments.length * 0.7, 1);
-          const matchingUris = scoredUris
-            .filter(({ score }) => score >= minScore)
-            .sort((a, b) => b.score - a.score);
-
-          if (matchingUris.length === 0) {
+      vscode.workspace.findFiles(PATTERN1, null, MAX_FILES).then((uris) => {
+        // Calculate match scores for all URIs
+        const scoredUris = uris.map((uri) => {
+          const relativePath = vscode.workspace.asRelativePath(uri.fsPath);
+          relativePath;
+          if (
+            relativePath.includes("accounts.") &&
+            relativePath.includes(segments[0])
+          ) {
             vscode.window.showWarningMessage(
-              `[Pathfinder] No files found for keyword: ${selectedText}`
+              `[Pathfinder] ${relativePath} ${matchPattern(
+                relativePath,
+                segments
+              )}`
             );
-            return;
           }
 
-          vscode.window
-            .showQuickPick(
-              matchingUris.map(({ uri, score }) => {
-                const relativePath = vscode.workspace.asRelativePath(
-                  uri.fsPath
-                );
-                return {
-                  label: `${
-                    relativePath?.length > 82
-                      ? "..." + relativePath.slice(-80)
-                      : relativePath
-                  }`,
-                  uri: uri.fsPath,
-                };
-              })
-            )
-            .then((selected) => {
-              if (selected) {
-                vscode.workspace.openTextDocument(selected.uri).then((doc) => {
-                  vscode.window.showTextDocument(doc);
-                });
-              }
-            });
+          try {
+            const score = matchPattern(relativePath, segments);
+            return { uri, score };
+          } catch (err) {
+            return { uri, score: 0 };
+          }
+        });
+
+        // Filter and sort URIs based on match scores
+        const minScore = Math.max(segments.length * 0.7, 1);
+        const matchingUris = scoredUris
+          .filter(({ score }) => score >= minScore)
+          .sort((a, b) => b.score - a.score);
+        vscode.window.showWarningMessage(
+          `[Pathfinder] matchingUris: ${matchingUris.length}`
+        );
+
+        if (matchingUris.length === 0) {
+          vscode.window.showWarningMessage(
+            `[Pathfinder] No files found for keyword: ${selectedText}`
+          );
+          return;
         }
-      );
+
+        vscode.window
+          .showQuickPick(
+            matchingUris.map(({ uri, score }) => {
+              const relativePath = vscode.workspace.asRelativePath(uri.fsPath);
+              return {
+                label: `${
+                  relativePath?.length > 82
+                    ? "..." + relativePath.slice(-80)
+                    : relativePath
+                }`,
+                uri: uri.fsPath,
+              };
+            })
+          )
+          .then((selected) => {
+            if (selected) {
+              vscode.workspace.openTextDocument(selected.uri).then((doc) => {
+                vscode.window.showTextDocument(doc);
+              });
+            }
+          });
+      });
     }
   );
 
@@ -101,11 +107,10 @@ export function activate(context: vscode.ExtensionContext): void {
 }
 
 function matchPattern(pattern: string, tokens: string[]): number {
-  const patterns = pattern.split(".")[0];
   const removePageRoute =
-    patterns.startsWith("app/") || patterns.startsWith("pages/")
-      ? patterns.split(/(?:app|pages)\//)
-      : patterns.split(/\/(?:app|pages)\//);
+    pattern.startsWith("app/") || pattern.startsWith("pages/")
+      ? pattern.split(/(?:app|pages)\//)
+      : pattern.split(/\/(?:app|pages)\//);
   const patternTokens = (
     removePageRoute.length > 1 ? removePageRoute[1] : ""
   ).split("/");
@@ -116,6 +121,8 @@ function matchPattern(pattern: string, tokens: string[]): number {
   let i = patternLength - 1;
   let j = tokensLength - 1;
   let safeCount = SAFETY_COUNT;
+
+  console.log(patternTokens);
 
   while (i >= 0 && j >= 0 && safeCount > 0) {
     safeCount -= 1;
