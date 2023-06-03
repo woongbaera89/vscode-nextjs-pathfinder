@@ -1,0 +1,12 @@
+{
+  "case": "/",
+  "case1": "/api/auth",
+  "case2": "/item/238175",
+  "case3": "/item/[itemId]",
+  "case4": "/auth/google",
+  "case5": "/auth/google/login?redirect=/item/238175",
+  "case6": "/search",
+  "case7": "/search/results",
+  "case8": "/search/results?query=iphone",
+  "case9": "/search/feedback"
+}
