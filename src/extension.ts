@@ -122,35 +122,34 @@ function matchPattern(pattern: string, tokens: string[]): number {
   let j = tokensLength - 1;
   let safeCount = SAFETY_COUNT;
 
-  console.log(patternTokens);
-
   while (i >= 0 && j >= 0 && safeCount > 0) {
+    console.log(patternTokens[i], tokens[j]);
     safeCount -= 1;
     if (!patternTokens[i] || !tokens[j]) {
       break;
     }
 
-    if (
-      !patternTokens[i].startsWith("[") &&
-      patternTokens[i] !== tokens[j] &&
-      (patternTokens[i] === "index" || patternTokens[i] === "route")
-    ) {
-      i -= 1;
-    } else if (
-      patternTokens[i].split(/(?:.ts|.tsx|.js|.jsx)/)[0] === tokens[j]
-    ) {
+    // concern index.tsx | route.js | ...
+    const target = patternTokens[i].split(/(?:.ts|.tsx|.js|.jsx)/)[0];
+
+    if (target === tokens[j]) {
       score += 1;
       i -= 1;
       j -= 1;
     } else if (
-      patternTokens[i].startsWith("[") &&
-      patternTokens[i].endsWith("]") &&
+      target.startsWith("[") &&
+      target.endsWith("]") &&
       !tokens[j].startsWith("[") &&
       !tokens[j].endsWith("]")
     ) {
       score += 0.5;
       i -= 1;
       j -= 1;
+    } else if (target !== tokens[j]) {
+      if (target === "index" || target === "route") {
+        score += 0.5;
+      }
+      i -= 1;
     } else {
       break;
     }
