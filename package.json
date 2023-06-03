@@ -1,0 +1,64 @@
+{
+  "name": "nextjs-pathfinder",
+  "displayName": "Nextjs-pathfinder",
+  "description": "Navigate and open files in Next.js projects based on pathname strings. Supports dynamic routing.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ".."
+  },
+  "categories": [
+    "Other"
+  ],
+  "publisher": "woongbaera89",
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "nextjs-pathfinder.findFile",
+        "title": "Find and Open Files by Pathname"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "nextjs-pathfinder.findFile",
+        "key": "cmd+alt+n",
+        "mac": "cmd+alt+n",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "nextjs-pathfinder.findFile",
+          "when": "editorTextFocus",
+          "group": "navigation",
+          "title": "Find and Open Files by Pathname"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "vsce package --out ./releases/nextjs-pathfinder-$(node -p \"require('./package.json').version\").vsix",
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.78.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "@vscode/test-electron": "^2.3.0"
+  }
+}
