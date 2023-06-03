@@ -52,7 +52,7 @@ export function activate(context: vscode.ExtensionContext): void {
         });
 
         // Filter and sort URIs based on match scores
-        const minScore = Math.max(segments.length * 0.7, 1);
+        const minScore = Math.max(segments.length * 0.5, 1);
         const matchingUris = scoredUris
           .filter(({ score }) => score >= minScore)
           .sort((a, b) => b.score - a.score);
@@ -128,12 +128,12 @@ function matchPattern(pattern: string, tokens: string[]): number {
       !tokens[j].startsWith("[") &&
       !tokens[j].endsWith("]")
     ) {
-      score += 0.5;
+      score += 0.51;
       i -= 1;
       j -= 1;
     } else if (target !== tokens[j]) {
       if (target === "index" || target === "route") {
-        score += 0.5;
+        score += 0.1;
       }
       i -= 1;
     } else {
