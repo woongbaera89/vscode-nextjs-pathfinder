@@ -4,6 +4,10 @@ All notable changes to the "nextjs-pathfinder" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.0]
+
+- Show results ordered by relevance
+
 ## [1.0.0]
 
 - Support dynamic route pathname ( e.g: '/auth/google/login' => '../pages/auth/[method]/login.tsx')
