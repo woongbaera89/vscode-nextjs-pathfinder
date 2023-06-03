@@ -2,7 +2,7 @@
   "name": "nextjs-pathfinder",
   "displayName": "Nextjs-pathfinder",
   "description": "Navigate and open files in Next.js projects based on pathname strings. Supports dynamic routing.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.78.0"
   },
