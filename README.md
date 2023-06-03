@@ -32,20 +32,20 @@ Nextjs Pathfinder does not require any configuration. It automatically works wit
 
 ## Feedback and Contributions
 
-If you have any feedback, suggestions, or bug reports, please feel free to open an issue on the [GitHub repository](link-to-your-github-repo). Contributions are also welcome! Fork the repository, make your changes, and submit a pull request.
+If you have any feedback, suggestions, or bug reports, please feel free to open an issue on the [GitHub repository](https://github.com/woongbaera89/vscode-nextjs-pathfinder). Contributions are also welcome! Fork the repository, make your changes, and submit a pull request.
 
 ## License
 
-This extension is licensed under the [MIT License](link-to-your-license-file).
+This extension is licensed under the [MIT License](https://github.com/woongbaera89/vscode-nextjs-pathfinder/blob/main/LICENSE.txt).
 
 ## Credits
 
-Nextjs Pathfinder is developed and maintained by [Your Name](link-to-your-website).
+Nextjs Pathfinder is developed and maintained by [Woongbae Ra](https://github.com/woongbaera89).
 
 ## Release Notes
 
-You can find the release notes in the [CHANGELOG.md](link-to-your-changelog-file) file.
+You can find the release notes in the [CHANGELOG.md](https://github.com/woongbaera89/vscode-nextjs-pathfinder/blob/main/CHANGELOG.md) file.
 
 ---
 
-Happy coding with Nextjs Pathfinder! If you find this extension useful, don't forget to [rate and review it on the Visual Studio Code Marketplace](link-to-your-extension-on-marketplace) to support its development.
+Happy coding with Nextjs Pathfinder! If you find this extension useful, don't forget to rate and review it on the Visual Studio Code Marketplace to support its development.

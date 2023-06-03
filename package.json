@@ -43,7 +43,7 @@
     }
   },
   "scripts": {
-    "build": "vsce package --out ./releases/nextjs-pathfinder-$(node -p \"require('./package.json').version\").vsix",
+    "build": "vsce package --out ./nextjs-pathfinder-$(node -p \"require('./package.json').version\").vsix",
     "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./"
