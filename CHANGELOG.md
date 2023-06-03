@@ -4,6 +4,10 @@ All notable changes to the "nextjs-pathfinder" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.2]
+
+- Remove unnecessary warnings
+
 ## [1.2.1]
 
 - Bug fix

@@ -11,7 +11,6 @@ export function activate(context: vscode.ExtensionContext): void {
       const editor = vscode.window.activeTextEditor;
 
       if (!editor) {
-        vscode.window.showWarningMessage("[Pathfinder] No active editor!");
         return;
       }
 
@@ -28,7 +27,9 @@ export function activate(context: vscode.ExtensionContext): void {
       selectedText = matchQS ? matchQS[0] : selectedText;
 
       if (!selectedText) {
-        vscode.window.showWarningMessage("[Pathfinder] No text selected!");
+        vscode.window.showWarningMessage(
+          "[Nextjs Pathfinder] No text selected."
+        );
         return;
       }
 
@@ -41,18 +42,6 @@ export function activate(context: vscode.ExtensionContext): void {
         // Calculate match scores for all URIs
         const scoredUris = uris.map((uri) => {
           const relativePath = vscode.workspace.asRelativePath(uri.fsPath);
-          relativePath;
-          if (
-            relativePath.includes("accounts.") &&
-            relativePath.includes(segments[0])
-          ) {
-            vscode.window.showWarningMessage(
-              `[Pathfinder] ${relativePath} ${matchPattern(
-                relativePath,
-                segments
-              )}`
-            );
-          }
 
           try {
             const score = matchPattern(relativePath, segments);
@@ -67,13 +56,10 @@ export function activate(context: vscode.ExtensionContext): void {
         const matchingUris = scoredUris
           .filter(({ score }) => score >= minScore)
           .sort((a, b) => b.score - a.score);
-        vscode.window.showWarningMessage(
-          `[Pathfinder] matchingUris: ${matchingUris.length}`
-        );
 
         if (matchingUris.length === 0) {
           vscode.window.showWarningMessage(
-            `[Pathfinder] No files found for keyword: ${selectedText}`
+            `[Nextjs Pathfinder] No files found for: ${selectedText}`
           );
           return;
         }
