@@ -2,6 +2,12 @@
 
 Nextjs Pathfinder is a Visual Studio Code extension that enhances the development experience for Nextjs developers. It allows you to quickly navigate and open files in your Nextjs projects based on the pathname strings, making it easier to locate and work with specific files in your Nextjs codebase.
 
+
+https://github.com/woongbaera89/vscode-nextjs-pathfinder/assets/37330830/2bc678ad-b097-4c75-bfb4-fcd4eda2432a
+
+
+
+
 ## Features
 
 - Navigate and open files in Nextjs projects by specifying the pathname string.
