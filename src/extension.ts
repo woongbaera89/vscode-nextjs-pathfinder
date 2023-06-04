@@ -111,7 +111,6 @@ function matchPattern(pattern: string, tokens: string[]): number {
   let isEndsWithIndex = false;
 
   while (i >= 0 && j >= 0 && safeCount > 0) {
-    console.log(patternTokens[i], tokens[j]);
     safeCount -= 1;
     if (!patternTokens[i] || !tokens[j]) {
       break;
