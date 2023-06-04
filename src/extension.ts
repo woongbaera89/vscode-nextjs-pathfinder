@@ -100,6 +100,7 @@ function matchPattern(pattern: string, tokens: string[]): number {
   const patternTokens = (
     removePageRoute.length > 1 ? removePageRoute[1] : ""
   ).split("/");
+
   const patternLength = patternTokens.length;
   const tokensLength = tokens.length;
 
@@ -107,6 +108,7 @@ function matchPattern(pattern: string, tokens: string[]): number {
   let i = patternLength - 1;
   let j = tokensLength - 1;
   let safeCount = SAFETY_COUNT;
+  let isEndsWithIndex = false;
 
   while (i >= 0 && j >= 0 && safeCount > 0) {
     console.log(patternTokens[i], tokens[j]);
@@ -118,7 +120,10 @@ function matchPattern(pattern: string, tokens: string[]): number {
     // concern index.tsx | route.js | ...
     const target = patternTokens[i].split(/(?:.ts|.tsx|.js|.jsx)/)[0];
 
-    if (target === tokens[j]) {
+    if (i === patternLength - 1 && (target === "index" || target === "route")) {
+      i -= 1;
+      isEndsWithIndex = true;
+    } else if (target === tokens[j]) {
       score += 1;
       i -= 1;
       j -= 1;
@@ -128,20 +133,20 @@ function matchPattern(pattern: string, tokens: string[]): number {
       !tokens[j].startsWith("[") &&
       !tokens[j].endsWith("]")
     ) {
-      score += 0.51;
+      score += 0.5;
       i -= 1;
       j -= 1;
-    } else if (target !== tokens[j]) {
-      if (target === "index" || target === "route") {
-        score += 0.1;
-      }
-      i -= 1;
     } else {
       break;
     }
   }
 
-  return score;
+  // exact match is more valuable ( 'foo/bar', 'pages/foo/bar' >> 'pages/some/foo/bar'  )
+  const penalty =
+    Math.abs(patternLength - (isEndsWithIndex ? 1 : 0) - tokensLength) /
+    Math.max(patternLength, tokensLength);
+
+  return score - penalty;
 }
 
 export function deactivate(): void {}
