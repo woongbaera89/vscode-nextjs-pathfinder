@@ -31,7 +31,7 @@
     }],
     "keybindings": [{
       "command": "nextjs-pathfinder.findFile",
-      "key": "cmd+alt+n",
+      "key": "ctrl+alt+n",
       "mac": "cmd+alt+n",
       "when": "editorTextFocus"
     }],
@@ -45,13 +45,13 @@
     }
   },
   "scripts": {
-    "build": "vsce package --out ./nextjs-pathfinder-$(node -p \"require('./package.json').version\").vsix",
+    "build": "vsce package --out ./nextjs-pathfinder-%npm_package_version%.vsix",
     "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/vscode": "^1.78.0",
+    "@types/vscode": "^1.60.0",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
