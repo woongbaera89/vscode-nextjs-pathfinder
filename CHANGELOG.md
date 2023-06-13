@@ -4,6 +4,11 @@ All notable changes to the "nextjs-pathfinder" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.6]
+
+- Support for vscode v1.60.0 ~ 
+- Fix window default keybindings ( ctrl+alt+n )
+
 ## [1.2.4]
 
 - More strict to filter finding results.
