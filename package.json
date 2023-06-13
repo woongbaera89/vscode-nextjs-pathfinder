@@ -17,35 +17,31 @@
     "next.js",
     "navigation",
     "files",
-    "dynamic routing"
+    "dynamic routing",
+    "javascript",
+    "file system routing"
   ],
   "publisher": "woongbaera",
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "nextjs-pathfinder.findFile",
-        "title": "Find and Open Files by Pathname"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "nextjs-pathfinder.findFile",
-        "key": "cmd+alt+n",
-        "mac": "cmd+alt+n",
-        "when": "editorTextFocus"
-      }
-    ],
+    "commands": [{
+      "command": "nextjs-pathfinder.findFile",
+      "title": "Find and Open Files by Pathname"
+    }],
+    "keybindings": [{
+      "command": "nextjs-pathfinder.findFile",
+      "key": "cmd+alt+n",
+      "mac": "cmd+alt+n",
+      "when": "editorTextFocus"
+    }],
     "menus": {
-      "editor/context": [
-        {
-          "command": "nextjs-pathfinder.findFile",
-          "when": "editorTextFocus",
-          "group": "navigation",
-          "title": "Find and Open Files by Pathname"
-        }
-      ]
+      "editor/context": [{
+        "command": "nextjs-pathfinder.findFile",
+        "when": "editorTextFocus",
+        "group": "navigation",
+        "title": "Find and Open Files by Pathname"
+      }]
     }
   },
   "scripts": {
